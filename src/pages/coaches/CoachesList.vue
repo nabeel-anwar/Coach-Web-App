@@ -6,7 +6,9 @@
     <base-card>
       <div class="controls">
         <base-button mode="outlined">Refresh</base-button>
-        <base-button link to="register">Register as Coach</base-button>
+        <base-button v-if="!isCoach" link to="register"
+          >Register as Coach</base-button
+        >
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -62,6 +64,7 @@ const filteredCoaches = computed(() => {
   });
 });
 const hasCoaches = computed(() => store.getters['coaches/hasCoaches']); //Namespaced/getter Function
+const isCoach = computed(() => store.getters['coaches/isCoach']);
 
 const setFilters = function (updatedFilters) {
   activeFilters.value = updatedFilters;
