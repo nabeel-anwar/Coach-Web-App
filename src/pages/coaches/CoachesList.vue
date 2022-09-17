@@ -5,7 +5,12 @@
       <button>Refresh</button>
       <router-link to="register">Register as Coach</router-link>
     </div>
-    List of Coaches
+    <ul v-if="hasCoaches">
+      <li v-for="coach in filteredCoaches" :key="coach.id">
+        {{ coach.firstName }}
+      </li>
+    </ul>
+    <h1 v-else>No coaches found</h1>
   </section>
 </template>
 
@@ -16,7 +21,10 @@ export default {
 </script>
 
 <script setup>
-import { ref } from 'vue';
-const title = ref(null);
-title.value = 'Coaches Page';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+const filteredCoaches = computed(() => store.getters['coaches/coaches']);
+const hasCoaches = computed(() => store.getters['coaches/hasCoaches']); //Namespaced/getter Function
 </script>
