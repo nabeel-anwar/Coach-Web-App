@@ -36,10 +36,10 @@ export default {
 <script setup>
 import { ref, defineProps, computed, onBeforeMount } from 'vue';
 import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+//import { useRoute } from 'vue-router';
 
 const props = defineProps(['id']);
-const route = useRoute();
+//const route = useRoute();
 const store = useStore();
 
 const selectedCoach = ref(null);
@@ -50,7 +50,7 @@ const fullName = computed(
 const areas = computed(() => selectedCoach.value.areas);
 const rate = computed(() => selectedCoach.value.hourlyRate);
 const description = computed(() => selectedCoach.value.description);
-const contactLink = computed(() => route.path + '/contact');
+const contactLink = computed(() => '/coaches/' + props.id + '/contact');
 
 onBeforeMount(
   () =>
