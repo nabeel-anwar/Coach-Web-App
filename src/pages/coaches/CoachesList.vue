@@ -87,8 +87,8 @@ const loadCoaches = async function () {
   isLoading.value = true;
   try {
     await store.dispatch('coaches/loadCoaches');
-  } catch (error) {
-    error.value = error.message || 'Something went wrong!';
+  } catch (errors) {
+    error.value = errors.message || 'Something went wrong!';
   }
   isLoading.value = false;
 };

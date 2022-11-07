@@ -31,12 +31,12 @@ export default {
       const response = await fetch(
         `https://vue-http-demo-7b13e-default-rtdb.firebaseio.com/coaches.json`
       );
+      const responseData = await response.json();
 
       if (!response.ok) {
-        throw new Error('Error while getting coaches');
+        throw new Error(responseData.message || 'Error while getting coaches');
       }
 
-      const responseData = await response.json();
       const coaches = [];
 
       for (const key in responseData) {
@@ -54,6 +54,7 @@ export default {
       context.commit('setCoaches', coaches);
     } catch (error) {
       console.log(error.message);
+      throw error;
     }
   },
 };
